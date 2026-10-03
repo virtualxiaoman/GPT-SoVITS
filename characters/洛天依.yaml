@@ -1,0 +1,9 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '洛天依'
+version: 'v2ProPlus'   # 仅供查看，程序会按权重文件自动识别版本
+gpt: 'G:\Models\GPT-SoVITS\洛天依\e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\洛天依\e8_s384.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\洛天依\我现在需要一个长达三秒的语音.wav'
+prompt_text: '我现在需要一个长达三秒的语音'
+prompt_lang: 'zh'
+note: '洛天依13周年生日会模型（B站@只想干饭的麦克斯韦妖，禁止商用）'

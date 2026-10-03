@@ -193,3 +193,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# xm_tools text2video 运行产物（wav/视频等项目文件不进仓库）
+xm_tools/text2video/projects/
+
+# TTS 输出音频（运行产物）
+outputs/
+/outputs/

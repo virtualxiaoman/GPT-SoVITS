@@ -29,6 +29,7 @@ from datetime import datetime
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_OUT = os.path.join(REPO_ROOT, "outputs")
 CHARACTERS_DIR = os.path.join(REPO_ROOT, "characters")
+DEFAULT_ROLE = "洛天依"
 
 _pipeline = None
 _loaded = {"gpt": None, "sovits": None}
@@ -84,16 +85,18 @@ def _get_pipeline():
     return _pipeline
 
 
-def synthesize(role_name, target_text, lang="zh", out_dir=None, ref_audio=None,
+def synthesize(role_name=DEFAULT_ROLE, target_text="", lang="zh", out_dir=None, ref_audio=None,
                prompt_text=None, prompt_lang=None, speed_factor=1.0, seed=-1,):
     """合成语音并返回生成 wav 的绝对路径。
 
-    role_name: characters/ 中登记的角色名，如 "星野"（用 load_roles() 可查全部）。
+    role_name: characters/ 中登记的角色名，如 "洛天依"（默认值，用 load_roles() 可查全部）。
     target_text: 要合成的文本。
     lang: 文本语言，zh / ja / en / ko / yue。
     out_dir: 输出目录（默认 <仓库>/outputs）。
     ref_audio / prompt_text / prompt_lang: 覆盖该角色默认的参考音频及其文本、语言。
     """
+    if not target_text or not target_text.strip():
+        raise ValueError("target_text 不能为空")
     roles = load_roles()
     if role_name not in roles:
         raise KeyError("未注册的角色: %s，可用角色: %s" % (role_name, "、".join(roles)))
@@ -141,7 +144,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
     parser = argparse.ArgumentParser(description="GPT-SoVITS 角色语音合成：文本 + 角色名 -> wav 路径")
-    parser.add_argument("--role", help="角色名，如 星野（用 --list 查看全部）")
+    parser.add_argument("--role", default=DEFAULT_ROLE, help="角色名（默认 洛天依，用 --list 查看全部）")
     parser.add_argument("--text", help="要合成的文本")
     parser.add_argument("--lang", default="zh", help="文本语言: zh/ja/en/ko/yue（默认 zh）")
     parser.add_argument("--out", default=None, help="输出目录（默认 <仓库>/outputs）")
@@ -160,7 +163,7 @@ def main():
         return
 
     if not args.role or not args.text:
-        parser.error("需要 --role 和 --text（用 --list 查看可用角色）")
+        parser.error("需要 --text（角色默认 洛天依，用 --list 查看可用角色）")
 
     out_path = synthesize(
         args.role,

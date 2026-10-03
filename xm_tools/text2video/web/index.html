@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>text2video 编辑器</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <span class="brand">text2video 编辑器</span>
+  <select id="sel-project" title="打开项目"></select>
+  <button id="btn-new">＋ 新建项目</button>
+  <span id="save-state" class="muted"></span>
+  <span class="flex"></span>
+  <span id="render-state" class="muted"></span>
+  <button id="btn-save">保存</button>
+  <button id="btn-render" class="primary">渲染出片</button>
+</header>
+
+<main>
+  <section id="left">
+    <div id="preview-box">
+      <div id="preview">
+        <video id="video" playsinline></video>
+        <div id="overlay" class="overlay hidden"></div>
+        <div id="no-video" class="hidden">无视频模式（字幕按 1920×1080 画布预览）</div>
+      </div>
+    </div>
+    <div id="transport">
+      <button id="btn-play">▶</button>
+      <button id="btn-back" class="mini">−5s</button>
+      <button id="btn-fwd" class="mini">+5s</button>
+      <input id="seek" type="range" min="0" max="10" step="0.01" value="0">
+      <span id="time-label">0.00 / 0.00</span>
+    </div>
+    <div id="tl-bar">
+      <span class="muted">拖动块平移（0.05s 吸附、自动防重叠）；Alt+拖动=只动音频；预览区拖字幕改位置；空格播放；Ctrl+S 保存</span>
+      <span class="flex"></span>
+      <button id="btn-zoom-out" class="mini">−</button>
+      <button id="btn-zoom-in" class="mini">＋</button>
+    </div>
+    <div id="timeline">
+      <div id="tl-inner">
+        <div id="video-end" class="vline hidden"></div>
+        <div id="ruler" class="ruler"></div>
+        <div id="track-audio" class="track"><span class="track-tag">音频</span></div>
+        <div id="track-sub" class="track"><span class="track-tag">字幕</span></div>
+        <div id="playhead" class="playhead"></div>
+      </div>
+    </div>
+  </section>
+
+  <aside id="panel">
+    <div class="sec"><h3>项目</h3><div id="proj-info" class="info"></div></div>
+
+    <div class="sec"><h3>全局</h3>
+      <div class="row"><label>原声音量 <span id="v-orig-label" class="val"></span></label>
+        <input id="v-orig" type="range" min="-30" max="6" step="1"></div>
+      <div class="row"><label>配音音量 <span id="v-tts-label" class="val"></span></label>
+        <input id="v-tts" type="range" min="-30" max="6" step="1"></div>
+      <div class="row">
+        <label>起始(s) <input id="tl-start" type="number" step="0.1" class="num"></label>
+        <label>终止(s) <input id="tl-end" type="number" step="0.1" class="num" placeholder="自动"></label>
+        <button id="btn-relayout" class="mini">重新排版</button>
+      </div>
+      <div id="fit-info" class="info"></div>
+      <button id="btn-resynth" class="warn hidden"></button>
+      <div class="row"><label>导出质量
+        <select id="render-quality">
+          <option value="standard">标准（编码快、文件小）</option>
+          <option value="high">高（字幕清晰，体积适中）</option>
+          <option value="lossless">无损（默认，文件最大）</option>
+        </select></label></div>
+    </div>
+
+    <div class="sec"><h3>选中片段</h3>
+      <div id="seg-empty" class="muted">点选时间轴上的块（蓝=音频、橙=字幕）</div>
+      <div id="seg-body" class="hidden">
+        <div class="row"><label class="chk" title="勾选后：改字号 / 颜色 / 描边 / 阴影 / 位置，会同步到所有字幕（时间与文本不受影响）">
+          <input id="sync-all" type="checkbox"> 样式 / 位置同步到全部字幕</label></div>
+        <div class="row"><label>字幕文本</label></div>
+        <input id="sg-text" type="text">
+        <div class="row">
+          <label>音频开始 <input id="sg-start" type="number" step="0.05" class="num"></label>
+          <label>音频时长 <input id="sg-dur" type="text" class="num" readonly title="由音频决定"></label>
+        </div>
+        <div class="row"><label>片段音量 <span id="sg-vol-label" class="val"></span></label></div>
+        <input id="sg-vol" type="range" min="-30" max="6" step="1">
+        <hr>
+        <div class="row">
+          <label>字幕开始 <input id="sb-start" type="number" step="0.05" class="num"></label>
+          <label>字幕时长 <input id="sb-dur" type="number" step="0.1" min="0.2" class="num"></label>
+        </div>
+        <div class="row">
+          <label>X <input id="sb-x" type="number" class="num" placeholder="默认"></label>
+          <label>Y <input id="sb-y" type="number" class="num" placeholder="默认"></label>
+          <button id="btn-clear-xy" class="mini">清位置</button>
+        </div>
+        <div class="row">
+          <label>字号 <input id="sb-size" type="number" class="num" placeholder="默认"></label>
+          <label>文字色 <input id="sb-color" type="color"><input id="sb-color-on" type="checkbox" title="覆盖（直接点色块选色会自动勾上）"></label>
+        </div>
+        <div class="row">
+          <label>描边色 <input id="sb-oc" type="color"><input id="sb-oc-on" type="checkbox" title="覆盖（直接点色块选色会自动勾上）"></label>
+          <label>描边宽 <input id="sb-ow" type="number" class="num" placeholder="默认"></label>
+        </div>
+        <div class="row">
+          <label>阴影 <input id="sb-sh" type="number" class="num" placeholder="默认"></label>
+          <button id="btn-clear-style" class="mini">清除样式覆盖</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<div id="dlg" class="dialog hidden">
+  <div class="dlg-box">
+    <h3>新建项目</h3>
+    <label>文本（必填）</label>
+    <textarea id="nw-text" rows="5" placeholder="粘贴要配音的文本…"></textarea>
+    <label>视频路径（留空 = 无视频模式）</label>
+    <input id="nw-video" type="text" placeholder="D:\videos\in.mp4">
+    <div class="row">
+      <label>角色 <select id="nw-role"></select></label>
+      <label>语言 <select id="nw-lang">
+        <option>zh</option><option>ja</option><option>en</option><option>ko</option><option>yue</option>
+      </select></label>
+      <label>语速 <input id="nw-speed" type="number" step="0.05" value="1.0" class="num"></label>
+    </div>
+    <div class="row">
+      <label>起始(s) <input id="nw-start" type="number" step="0.1" value="0" class="num"></label>
+      <label>终止(s，空=自动) <input id="nw-end" type="number" step="0.1" class="num" placeholder="自动"></label>
+    </div>
+    <div id="nw-progress" class="info"></div>
+    <div class="row right">
+      <button id="nw-cancel">取消</button>
+      <button id="nw-create" class="primary">开始合成</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
