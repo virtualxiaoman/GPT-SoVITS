@@ -1,0 +1,9 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '阿罗娜（中配）'
+version: 'v2'
+gpt: 'G:\Models\GPT-SoVITS\阿罗娜\中配数据集制\成品模型\GPT_weights_v2\ALuoNa_cn-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\阿罗娜\中配数据集制\成品模型\SoVITS_weights_v2\ALuoNa_cn_e16_s256.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\阿罗娜\中配数据集制\参考音频\arona_work_talk_3.wav'
+prompt_text: ''   # 该数据集没有参考文本，留空即启用「无参考文本模式」
+prompt_lang: 'zh'
+note: '无参考文本模式（该数据集未附带参考文本）'

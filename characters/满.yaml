@@ -1,0 +1,9 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '满'
+version: 'v2ProPlus'
+gpt: 'G:\Models\GPT-SoVITS\满\GPT_weights_v2ProPlus\Man-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\满\SoVITS_weights_v2ProPlus\Man_e18_s306.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\满\all\ch0296_eventlogin_2.wav'
+prompt_text: '先生殿……良い格好じゃん。こういう感じも新鮮だね。'
+prompt_lang: 'ja'
+note: '参考音频来自 满\all.zip，已解压到 满\all\'

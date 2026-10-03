@@ -1,0 +1,8 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '白子（三年级）'
+version: 'v2'
+gpt: 'G:\Models\GPT-SoVITS\白子（三年级）\成品模型\GPT_weights_v2\BaiZi_grade_three-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\白子（三年级）\成品模型\SoVITS_weights_v2\BaiZi_grade_three_e24_s360.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\白子（三年级）\参考音频\all\CH0263_Gachaget.wav'
+prompt_text: 'アビドスの砂狼シロコ…。ん、またよろしくね、先生。'
+prompt_lang: 'ja'

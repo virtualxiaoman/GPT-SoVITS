@@ -1,0 +1,9 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '爱丽丝'
+version: 'v2ProPlus'
+gpt: 'G:\Models\GPT-SoVITS\爱丽丝\GPT_weights_v2ProPlus\AiLiSi-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\爱丽丝\SoVITS_weights_v2ProPlus\AiLiSi_e18_s486.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\爱丽丝\all\CH0200_Relationship_Up_2.wav'
+prompt_text: 'えへへ。先生と一緒に居られて、アリスは嬉しいです！もっとナデナデしてください……！'
+prompt_lang: 'ja'
+note: '参考音频来自 爱丽丝\all.zip，已解压到 爱丽丝\all\'

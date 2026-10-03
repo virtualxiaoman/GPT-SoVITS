@@ -1,0 +1,8 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '阿罗娜（日配）'
+version: 'v2'
+gpt: 'G:\Models\GPT-SoVITS\阿罗娜\日配数据集制\成品模型\GPT_weights_v2\ALuoNa-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\阿罗娜\日配数据集制\成品模型\SoVITS_weights_v2\ALuoNa_e16_s224.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\阿罗娜\日配数据集制\参考音频\Arona_AttendanceEvent13_Enter_2.wav'
+prompt_text: '先生と出会ってもう2年も経ちましたね！こちら、アロナが用意したお祝いのプレゼントです！'
+prompt_lang: 'ja'

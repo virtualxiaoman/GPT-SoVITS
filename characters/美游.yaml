@@ -1,0 +1,8 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '美游'
+version: 'v2'
+gpt: 'G:\Models\GPT-SoVITS\美游\日配数据集制\成品模型\GPT_weights_v2\Miyu-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\美游\日配数据集制\成品模型\SoVITS_weights_v2\Miyu_e16_s256.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\美游\日配数据集制\参考音频\CH0218_Season_Halloween.wav'
+prompt_text: '少し肌寒くなって来ましたね…温かいカボチャのお茶でも飲みたい気分です'
+prompt_lang: 'ja'

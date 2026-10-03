@@ -1,0 +1,8 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '星野'
+version: 'v2'   # 仅供查看，程序会按权重文件自动识别版本
+gpt: 'G:\Models\GPT-SoVITS\星野\日配数据集制\成品模型\GPT_weights_v2\Hoshino-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\星野\日配数据集制\成品模型\SoVITS_weights_v2\Hoshino_e16_s576.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\星野\日配数据集制\参考音频\Hoshino_Victory.wav'
+prompt_text: 'おー、勝った勝った、先生、次も適度に頑張るから、よろしくねー。'
+prompt_lang: 'ja'

@@ -1,0 +1,8 @@
+# 角色配置：名称取文件名，可在下方修改路径与参考音频
+name: '梓'
+version: 'v2'
+gpt: 'G:\Models\GPT-SoVITS\梓\日配数据集制\成品模型\GPT_weights_v2\Zi_BaiZhou-e15.ckpt'
+sovits: 'G:\Models\GPT-SoVITS\梓\日配数据集制\成品模型\SoVITS_weights_v2\Zi_BaiZhou_e16_s256.pth'
+ref_audio: 'G:\Models\GPT-SoVITS\梓\日配数据集制\参考音频\Azusa_LogIn_1.wav'
+prompt_text: '先生のことを待ってた、今日の任務はなに？私に手伝えることはある？'
+prompt_lang: 'ja'
